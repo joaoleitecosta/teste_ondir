@@ -14,6 +14,7 @@ module.exports = {
           '@domain': './src/domain',
           '@utils': './src/utils',
           '@services': './src/services',
+          '@routes': './src/routes',
         },
       },
     ],
