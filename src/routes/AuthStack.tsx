@@ -3,12 +3,11 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {type IconProps} from '@components';
-import {LoginScreen} from '@screens';
+import {LoginScreen, SignUpScreen, SuccessScreen} from '@screens';
 
 export type AuthStackParamList = {
   SignUpScreen: undefined;
   LoginScreen: undefined;
-  ForgotPasswordScreen: undefined;
   SuccessScreen: {
     title: string;
     description: string;
@@ -24,6 +23,8 @@ export function AuthStack() {
       initialRouteName="LoginScreen"
       screenOptions={{headerShown: false, fullScreenGestureEnabled: true}}>
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+      <Stack.Screen name="SuccessScreen" component={SuccessScreen} />
     </Stack.Navigator>
   );
 }
