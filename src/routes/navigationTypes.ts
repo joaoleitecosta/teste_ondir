@@ -1,7 +1,8 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { AuthStackParamList } from './AuthStack';
+import type { AppStackParamList } from './AppStack';
 
-export type RootStackParamList = AuthStackParamList
+export type RootStackParamList = AuthStackParamList & AppStackParamList
 
 declare global {
 	namespace ReactNavigation {
