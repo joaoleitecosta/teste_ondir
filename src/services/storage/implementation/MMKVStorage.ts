@@ -1,10 +1,10 @@
-import { MMKV } from "react-native-mmkv";
+import { MMKV } from 'react-native-mmkv';
 
-import type { Storage } from "../storage";
+import type { Storage } from '../storage';
 
 export const MMKVInstance = new MMKV({
-	id: "NubbeApp",
-	encryptionKey: "djugsaudjdsajsabjdbsa",
+	id: 'TestOndirApp',
+	encryptionKey: 'djugsaudjdsajsabjdbsa',
 });
 
 export const MMKVStorage: Storage = {
