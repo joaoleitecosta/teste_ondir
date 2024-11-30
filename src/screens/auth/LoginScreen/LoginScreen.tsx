@@ -13,8 +13,11 @@ import {
 import type {AppScreenProps} from '@routes';
 
 import {type LoginSchema, loginSchema} from './loginSchema';
+import {useAuthSignIn} from '@domain';
+import {useToastService} from '@services';
 
 export function LoginScreen({navigation}: AppScreenProps<'LoginScreen'>) {
+  const {showToast} = useToastService();
   const {control, handleSubmit, formState} = useForm<LoginSchema>({
     resolver: yupResolver(loginSchema),
     defaultValues: {
@@ -24,12 +27,25 @@ export function LoginScreen({navigation}: AppScreenProps<'LoginScreen'>) {
     mode: 'onChange',
   });
 
+  const {isLoading, signIn} = useAuthSignIn({
+    onSuccess: () => {
+      navigation.navigate('HomeScreen');
+    },
+    onError: error => {
+      showToast({
+        message: error?.message,
+        type: 'error',
+        duration: 3000,
+      });
+    },
+  });
+
   async function submitForm(data: LoginSchema) {
-    console.log({data});
+    signIn(data);
   }
 
   function navigationToSignUpScreen() {
-    console.log('navigationToSignUpScreen');
+    navigation.navigate('SignUpScreen');
   }
 
   function navigateToForgotPasswordScreen() {
@@ -69,7 +85,7 @@ export function LoginScreen({navigation}: AppScreenProps<'LoginScreen'>) {
       <Button
         mt="s48"
         title="Entrar"
-        loading={false}
+        loading={isLoading}
         onPress={handleSubmit(submitForm)}
         disabled={!formState.isValid}
       />
