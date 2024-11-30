@@ -11,7 +11,11 @@ export function useAuthSignUp(options?: MutationOptions<void>) {
 		options,
 	);
 	function signUp(data: SignUpData) {
-		mutate(data);
+		mutate({
+			fullName: data.fullName,
+			email: data.email,
+			password: data.password,
+		});
 	}
 
 	return { signUp, isLoading };
