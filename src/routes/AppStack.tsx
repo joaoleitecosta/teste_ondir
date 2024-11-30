@@ -13,7 +13,11 @@ export function AppStack() {
   return (
     <Stack.Navigator
       initialRouteName="HomeScreen"
-      screenOptions={{headerShown: false, fullScreenGestureEnabled: true}}>
+      screenOptions={{
+        headerShown: false,
+        fullScreenGestureEnabled: true,
+        animation: 'fade_from_bottom',
+      }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
     </Stack.Navigator>
   );

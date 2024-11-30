@@ -21,7 +21,11 @@ export function AuthStack() {
   return (
     <Stack.Navigator
       initialRouteName="LoginScreen"
-      screenOptions={{headerShown: false, fullScreenGestureEnabled: true}}>
+      screenOptions={{
+        headerShown: false,
+        fullScreenGestureEnabled: true,
+        animation: 'fade_from_bottom',
+      }}>
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
       <Stack.Screen name="SuccessScreen" component={SuccessScreen} />

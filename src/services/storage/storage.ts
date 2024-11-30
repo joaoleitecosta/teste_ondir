@@ -1,4 +1,4 @@
-import { MMKVStorage } from "./implementation/MMKVStorage";
+import { asyncStorage } from './implementation/asyncStorage';
 
 export interface Storage {
 	getItem: <T>(key: string) => Promise<T | null>;
@@ -7,4 +7,4 @@ export interface Storage {
 	clear: () => Promise<void>;
 }
 
-export const storage: Storage = MMKVStorage;
+export const storage: Storage = asyncStorage;
