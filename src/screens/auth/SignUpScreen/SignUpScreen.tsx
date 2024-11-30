@@ -16,14 +16,24 @@ import {type SignUpSchema, signUpSchema} from './signUpSchema';
 import {useAsyncValidation} from './useAsyncValidation';
 import {useAuthSignUp} from '@domain';
 import {useToastService} from '@services';
+import {RootStackParamList} from '@routes';
+import {useResetNavigationSuccess} from '@hooks';
 
 const defaultValues: SignUpSchema = {
   fullName: '',
   email: '',
   password: '',
+  confirmedPassword: '',
+};
+
+const resetParams: RootStackParamList['SuccessScreen'] = {
+  title: 'Sua consta foi criada com sucesso!',
+  description: 'Agora você já pode fazer login na nossa platafoma.',
+  icon: {name: 'checkRound', color: 'success'},
 };
 export function SignUpScreen() {
   const {showToast} = useToastService();
+  const {reset} = useResetNavigationSuccess();
 
   const {control, handleSubmit, formState, watch, getFieldState} =
     useForm<SignUpSchema>({
@@ -32,7 +42,18 @@ export function SignUpScreen() {
       mode: 'onChange',
     });
 
-  const {isLoading, signUp} = useAuthSignUp();
+  const {isLoading, signUp} = useAuthSignUp({
+    onSuccess: () => {
+      reset(resetParams);
+    },
+    onError: error => {
+      showToast({
+        message: error?.message,
+        type: 'error',
+        duration: 3000,
+      });
+    },
+  });
 
   const {emailValidation} = useAsyncValidation({
     watch,
@@ -41,11 +62,6 @@ export function SignUpScreen() {
 
   async function submitForm(data: SignUpSchema) {
     await signUp(data);
-    showToast({
-      message: 'Conta criada com sucesso',
-      type: 'success',
-      duration: 3000,
-    });
   }
   return (
     <Screen canGoBack scrollable>
@@ -76,6 +92,14 @@ export function SignUpScreen() {
         control={control}
         name="password"
         placeholder="Digite sua senha"
+        label="Senha"
+        boxProps={{mb: 's20'}}
+      />
+
+      <FormPasswordInput
+        control={control}
+        name="confirmedPassword"
+        placeholder="Confirme sua senha"
         label="Senha"
         boxProps={{mb: 's48'}}
       />
