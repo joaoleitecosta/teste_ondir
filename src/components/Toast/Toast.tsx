@@ -53,7 +53,7 @@ export function Toast() {
         position: 'absolute',
         alignSelf: 'center',
         opacity: fadeAnim,
-        [position]: 100,
+        [position]: 40,
       }}>
       <ToastContent toast={toast} />
     </Animated.View>
