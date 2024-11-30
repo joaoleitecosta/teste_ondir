@@ -1,25 +1,19 @@
-import { useState } from 'react';
 import { SignUpData } from '../authTypes';
-import { storage } from '@services';
+import { MutationOptions, QueryKeys, useMutation } from '../../../infra';
+import { authService } from '../authService';
 
 
 
-export function useAuthSignUp() {
-	const [isLoading, setIsLoading] = useState(false);
-
-async	function signUp(data: SignUpData) {
-	setIsLoading(true);
-	const users: string | null = await storage.getItem('users');
-
-
-	const usersParse = users ? JSON.parse(users) : [];
-
-	console.log({usersParse});
-
-	await storage.setItem('users', JSON.stringify([...usersParse,data]));
-
-	setIsLoading(false);
+export function useAuthSignUp(options?: MutationOptions<void>) {
+	const { mutate, isLoading } = useMutation<SignUpData, void>(
+		(data) => authService.signUp(data),
+		[QueryKeys.AuthSignUp],
+		options,
+	);
+	function signUp(data: SignUpData) {
+		mutate(data);
 	}
 
 	return { signUp, isLoading };
 }
+

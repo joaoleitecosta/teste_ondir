@@ -1,9 +1,5 @@
+import { User } from '@domain';
 
-export interface User {
-	id: string;
-	fullName: string;
-	email: string;
-}
 
 export interface AuthCredential {
 	token: string;

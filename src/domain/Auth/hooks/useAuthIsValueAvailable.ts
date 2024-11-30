@@ -1,12 +1,10 @@
-
-import {useQuery} from '@tanstack/react-query';
 import {authService} from '../authService';
+import { QueryKeys, useQuery } from '../../../infra';
 
 export  function useAuthIsEmailAvailable({ email }: { email: string }) {
 	const {data, isFetching} = useQuery({
-    queryKey: ['VALIDATE_EMAIL', email ],
+    queryKey: [QueryKeys.AuthIsEmailAvailable, email ],
     queryFn: () => authService.isEmailAvailable(email),
-    retry: false,
     staleTime: 20000,
   });
 
