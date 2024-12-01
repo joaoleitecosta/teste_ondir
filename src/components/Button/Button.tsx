@@ -6,7 +6,7 @@ import {Text} from '../Text/Text';
 
 import {type ButtonPresets, buttonPresets} from './buttonPresets';
 
-interface ButtonProps extends TouchableOpacityBoxProps {
+export interface ButtonProps extends TouchableOpacityBoxProps {
   title: string;
   loading?: boolean;
   preset?: ButtonPresets;
@@ -26,6 +26,7 @@ export function Button({
       height={50}
       disabled={disabled || loading}
       alignItems="center"
+      testID="button"
       justifyContent="center"
       borderRadius="s16"
       paddingHorizontal="s20"
