@@ -13,7 +13,8 @@
 			"@utils": ["src/utils"],
 			"@services": ["src/services"],
 			"@infra": ["src/infra"],
-			"@types": ["src/types"]
+			"@types": ["src/types"],
+			"test-utils": ["src/test/test-utils"]
 
 		}
 	}
